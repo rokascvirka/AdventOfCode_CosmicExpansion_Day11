@@ -14,8 +14,8 @@ namespace AdventOfCode_CosmicExpansion_Day11
         {
             AddRows(galaxy);
             AddColumns(galaxy);
-        }
 
+        }
 
         public static void AddRows(GalaxyModel galaxy)
         {
@@ -37,19 +37,19 @@ namespace AdventOfCode_CosmicExpansion_Day11
 
         public static void AddColumns(GalaxyModel galaxy)
         {
-            if (galaxy.Galaxy == null || galaxy.Galaxy.Count == 0 || galaxy.Galaxy[0].Count == 0)
+            if (galaxy.UpdatedGalaxy == null || galaxy.UpdatedGalaxy.Count == 0 || galaxy.UpdatedGalaxy[0].Count == 0)
                 return;
 
-            galaxy.UpdatedGalaxy = galaxy.Galaxy.Select(row => new List<string>(row)).ToList();
-            int numColumns = galaxy.Galaxy[0].Count;
+            
+            int numColumns = galaxy.UpdatedGalaxy[0].Count;
 
             for (int column = 0; column < numColumns; column++)
             {
                 bool isAllDots = true;
 
-                for (int row = 0; row < galaxy.Galaxy.Count; row++)
+                for (int row = 0; row < galaxy.UpdatedGalaxy.Count; row++)
                 {
-                    if (galaxy.Galaxy[row].Count <= column || galaxy.Galaxy[row][column] != ".")
+                    if (galaxy.UpdatedGalaxy[row].Count <= column || galaxy.UpdatedGalaxy[row][column] != ".")
                     {
                         isAllDots = false;
                         break;
@@ -64,6 +64,12 @@ namespace AdventOfCode_CosmicExpansion_Day11
                     }
                 }
             }
+        }
+
+        public static void RenameGalaxies(GalaxyModel galaxy)
+        {
+            var numRows = galaxy.UpdatedGalaxy[0].Count;
+            var numColumns = galaxy.UpdatedGalaxy.Count;
         }
 
     }
