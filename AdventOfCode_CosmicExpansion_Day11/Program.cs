@@ -9,7 +9,8 @@ namespace AdventOfCode_CosmicExpansion_Day11
             var FILE_PATH = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "", "FakeData.txt");
 
             var galaxy =  FileReader.ReadFromFile(FILE_PATH);
-            GalaxyProcessor.ExpandGalaxy(galaxy);
+            GalaxyProcessor.AddRows(galaxy);
+            GalaxyProcessor.AddCollumns_V2(galaxy);
 
             foreach(var row in galaxy.Galaxy)
             {

@@ -13,7 +13,7 @@ namespace AdventOfCode_CosmicExpansion_Day11
         public static void ExpandGalaxy(GalaxyModel galaxy)
         {
             AddRows(galaxy);
-            AddColumns(galaxy);
+            AddCollumns_V2(galaxy);
 
         }
 
@@ -24,14 +24,51 @@ namespace AdventOfCode_CosmicExpansion_Day11
                 
                 if (galaxy.Galaxy[i].Contains("#"))
                 {
-                    galaxy.UpdatedGalaxy.Add(galaxy.Galaxy[i]);
+                    galaxy.UpdatedGalaxy.Add(new List<string>(galaxy.Galaxy[i]));
                     continue;
                 }
                 else
                 {
-                    galaxy.UpdatedGalaxy.Add(galaxy.Galaxy[i]);
-                    galaxy.UpdatedGalaxy.Add(galaxy.Galaxy[i]);
+                    galaxy.UpdatedGalaxy.Add(new List<string>(galaxy.Galaxy[i]));
+                    galaxy.UpdatedGalaxy.Add(new List<string>(galaxy.Galaxy[i]));
                 }
+            }
+        }
+
+        public static void AddCollumns_V2(GalaxyModel galaxy)
+        {
+            int numColumns = galaxy.Galaxy[0].Count;
+            int numRows = galaxy.Galaxy.Count;
+            List<int> columnsToAdd = new List<int>();
+
+            for (int column = 0; column < numColumns; column++)
+            {
+                bool isAllDots = true;
+
+                for (int row = 0; row < galaxy.UpdatedGalaxy.Count; row++)
+                {
+                    if (galaxy.UpdatedGalaxy[row].Count <= column || galaxy.UpdatedGalaxy[row][column] != ".")
+                    {
+                        isAllDots = false;
+                        break;
+                    }
+                }
+
+                if (isAllDots)
+                {
+                    columnsToAdd.Add(column);
+                }
+            }
+
+            columnsToAdd.Reverse();
+
+            foreach(int index in columnsToAdd)
+            {
+                for (int i = 0; i < galaxy.UpdatedGalaxy.Count; i++)
+                {
+                    galaxy.UpdatedGalaxy[i].Insert(index, ".");
+                }
+                
             }
         }
 
